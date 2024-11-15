@@ -1,5 +1,6 @@
 const chatInput = document.getElementById('chat-input');
 const sendBtn = document.getElementById('send-btn');
+const restartBtn = document.getElementById('restart-btn');
 const chatOutput = document.getElementById('chat-output');
 
 const responses = {
@@ -37,8 +38,16 @@ function handleUserInput() {
     chatInput.value = '';
 }
 
-// Add event listener for the Send button
+// Function to clear chat and reset the chatbot
+function restartChat() {
+    chatOutput.innerHTML = '';
+    chatInput.value = '';
+    appendMessage("Chat reset. How can I assist you?", 'bot-message');
+}
+
+// Add event listeners
 sendBtn.addEventListener('click', handleUserInput);
+restartBtn.addEventListener('click', restartChat);
 
 // Handle Enter key press
 chatInput.addEventListener('keypress', (e) => {
