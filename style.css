@@ -10,13 +10,26 @@ body {
 
 .chat-container {
     width: 400px;
-    height: 500px;
+    height: 550px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+/* Chat Title Box */
+.chat-title {
+    background-color: #007bff; /* Blue background */
+    color: #ffffff; /* White text */
+    text-align: center;
+    padding: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0; /* Rounded corners at the top */
+    border-bottom: 2px solid #0056b3; /* Adds a border for separation */
+    margin-bottom: 10px;
 }
 
 .chat-window {
@@ -64,7 +77,7 @@ body {
     border-radius: 5px;
 }
 
-#send-btn {
+#send-btn, #restart-btn {
     margin-left: 10px;
     background-color: #007bff;
     color: #fff;
@@ -74,6 +87,14 @@ body {
     cursor: pointer;
 }
 
+#restart-btn {
+    background-color: #dc3545;
+}
+
 #send-btn:hover {
     background-color: #0056b3;
+}
+
+#restart-btn:hover {
+    background-color: #c82333;
 }
