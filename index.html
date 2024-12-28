@@ -1,24 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatBot Dr.Man</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock</title>
+  <style>
+    @font-face {
+      font-family: 'Digital-7';
+      src: url('https://fonts.cdnfonts.com/s/15082/Digital7-1e1d.ttf') format('truetype');
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000000; /* Black background */
+      font-family: 'Courier New', Courier, monospace;
+      color: #ffffff; /* White text */
+    }
+    .clock {
+      text-align: center;
+    }
+    .clock .day {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #0000FF; /* Blue text for day */
+    }
+    .clock .time {
+      font-size: 6em; /* Increased font size */
+      font-weight: bold; /* Bold font */
+      font-family: 'Digital-7', monospace; /* LED style font */
+      color: #ffffff; /* White text for time */
+    }
+    .clock .time .seconds {
+      transition: opacity 0.5s ease-in-out;
+      display: inline-block; /* Ensure visibility */
+    }
+    .clock .date {
+      font-size: 1.5em;
+      margin-top: auto;
+      margin-bottom: 10px;
+      color: #0000FF; /* Blue text for date */
+    }
+  </style>
 </head>
 <body>
-    <div class="chat-container">
-        <!-- Chatbot Title Box -->
-        <div class="chat-title">ChatBot Dr.Man</div>
-        <div class="chat-window" id="chat-window">
-            <div class="chat-output" id="chat-output"></div>
-        </div>
-        <div class="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Type your message...">
-            <button id="send-btn">Send</button>
-            <button id="restart-btn">Restart</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
+  <div class="clock">
+    <div class="day" id="day"></div>
+    <div class="time" id="time"></div>
+    <div class="date" id="date"></div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const day = days[now.getDay()];
+      const date = now.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+
+      let hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // Convert 0 to 12
+      hours = hours.toString().padStart(2, '0');
+
+      document.getElementById("day").textContent = day.toUpperCase();
+      document.getElementById("date").textContent = date.toUpperCase();
+      document.getElementById("time").innerHTML = `${hours}:${minutes}:<span class="seconds" id="seconds">${seconds}</span> ${ampm}`;
+
+      const secondsElement = document.getElementById("seconds");
+      secondsElement.style.opacity = secondsElement.style.opacity === "0" ? "1" : "0";
+    }
+
+    setInterval(updateClock, 1000); // Update clock every second
+    updateClock(); // Initialize clock immediately
+  </script>
 </body>
 </html>
